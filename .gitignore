@@ -8,3 +8,4 @@ logs/
 */doc/_build/*
 .DS_Store
 ._*
+env/

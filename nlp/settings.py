@@ -158,11 +158,8 @@ LOGGING = {
 import nltk
 from nltk.tag import UnigramTagger
 from nltk.corpus import mac_morpho
-sentencas_treinadoras = mac_morpho.tagged_sents()[0:100]
 
+sentencas_treinadoras = mac_morpho.tagged_sents()[0:100]
 NLTK_DATAPATH = os.path.join(os.path.dirname(nltk.__file__), "data")
 ETIQUETADOR = UnigramTagger(sentencas_treinadoras)
-
 nltk.data.path = [NLTK_DATAPATH]
-
-#nltk.download('all', download_dir=NLTK_DATAPATH)
