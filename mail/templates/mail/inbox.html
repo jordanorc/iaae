@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+	$(function() {
+		$("#compose").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-mail-closed"
+			}
+		}).click(function() {
+			window.location = "{% url mail:send_mail %}"
+		});
+		
+		$("#mark").button({
+			text : false,
+			icons : {
+				primary : "ui-icon ui-icon-circlesmall-close"
+			}
+		});
+		$("#trash").button({
+			text : false,
+			icons : {
+				primary : "ui-icon-trash"
+			}
+		}).click(function() {
+			
+		});
+
+
+		$("#span").button({
+			text : false,
+			icons : {
+				primary : "ui-icon-notice"
+			}
+		}).click(function() {
+			
+		});
+
+		$("#read").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-mail-open"
+			}
+		}).click(function() {
+			
+		});
+
+		$("#important").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-star"
+			}
+		}).click(function() {
+			
+		});
+							
+	}); 
+</script>
+
+<div id="inbox_toolbar" class="toolbar ui-widget-header ui-corner-all">
+	<button id="mark">
+		Mark
+	</button>
+	<button id="compose">
+		Compose
+	</button>
+
+	<button id="trash">
+		Trash
+	</button>
+	<button id="span">
+		Mark as Span
+	</button>
+	<button id="read">
+		Mark as Read
+	</button>
+	<button id="important">
+		Mark as Important
+	</button>
+</div>
+
+<table class="email_list">
+	{% for mail in object_list %}
+	<tr>
+		<td class="email_mark"><input type="checkbox" /></td>
+		<td onclick="window.location = './{{ mail.pk }}'" class="email_name{% if not mail.read %} unread{%endif%}">{{ mail.from_name }}</td>
+		<td onclick="window.location = './{{ mail.pk }}'" class="email_subject{% if not mail.read %} unread{%endif%}">{{ mail.title }}</td>
+		<td onclick="window.location = './{{ mail.pk }}'" class="email_date{% if not mail.read %} unread{%endif%}">{{ mail.date }}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+*.*~
+*.pyc
+.settings/
+.project
+.pydevproject*/media/CACHE/*
+static_files/
+logs/
+*/doc/_build/*
+.DS_Store
+._*

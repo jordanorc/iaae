@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{% url nlp_view %}" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Enviar" />
+
+	{% if show_sentences %}
+	<h1>Quebra em sentenças (NLTK)</h1>
+	<ul>
+		{% for sentence in sentences %}
+		<li>
+			{{ sentence }}
+		</li>
+		{% endfor %}
+	</ul>
+	<h1>Sentenças com tags (NLTK)</h1>
+	{% for sentence in tagged_sentences %}
+	<p>
+		{% for word in sentence %}
+		{{ word.0 }}<strong> {{ word.1 }}</strong>
+		<br />
+		{% endfor %}
+	</p>
+	{% endfor %}
+
+	<h1>Sentenças com tags (visl)</h1>
+	{% for sentence in tagged_sentences_visl %}
+	<p>
+		{% for word in sentence %}
+		{{ word.0 }}<strong> {{ word.1 }}</strong>
+		<br />
+		{% endfor %}
+	</p>
+	{% endfor %}
+	{% endif %}
+</form>
+{% endblock %}

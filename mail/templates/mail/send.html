@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+	$(function() {
+		$("#back").button({
+			text : false,
+			icons : {
+				primary : "ui-icon ui-icon-arrowthick-1-w"
+			}
+		}).click(function() {
+			window.location = "{% url mail:inbox %}"
+		});
+		$("#send").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-mail-closed"
+			}
+		}).click(function() {
+			$("#form_email").submit();
+		});
+		$("#discard").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-trash"
+			}
+		}).click(function() {
+			window.location = "{% url mail:inbox %}"
+		});
+	}); 
+</script>
+
+<div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
+	<button id="back">
+		Back to Inbox
+	</button>
+	<button id="send">
+		Send
+	</button>
+	<button id="discard">
+		Discard
+	</button>
+</div>
+
+<form action="." id="form_email" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+</form>
+{% endblock %}

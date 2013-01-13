@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript">
+	$(function() {
+		$("#back").button({
+			text : false,
+			icons : {
+				primary : "ui-icon ui-icon-arrowthick-1-w"
+			}
+		}).click(function() {
+			window.location = "{% url mail:inbox %}"
+		});
+		$("#compose").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-mail-closed"
+			}
+		}).click(function() {
+			window.location = "{% url mail:send_mail %}"
+		});
+		$("#trash").button({
+			text : false,
+			icons : {
+				primary : "ui-icon-trash"
+			}
+		}).click(function() {
+			
+		});
+
+
+		$("#span").button({
+			text : false,
+			icons : {
+				primary : "ui-icon-notice"
+			}
+		}).click(function() {
+			
+		});
+
+		$("#important").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-star"
+			}
+		}).click(function() {
+			
+		});
+							
+	}); 
+</script>
+
+<div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
+	<button id="back">
+		Back to Inbox
+	</button>
+	<button id="compose">
+		Compose
+	</button>
+
+	<button id="trash">
+		Trash
+	</button>
+	<button id="span">
+		Mark as Span
+	</button>
+	<button id="important">
+		Mark as Important
+	</button>
+</div>
+
+<h1>{{ object.subject }}</h1>
+<h4>Sent by {{ object.from_name }}&lt;{{ object.from_email }}&gt; on {{ object.date }}</h4>
+
+{{ object.message }}
+
+<h1>Reply</h1>
+<textarea style="width: 100%; height: 150px;"></textarea>
+
+
+{% endblock %}

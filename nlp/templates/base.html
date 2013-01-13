@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+		<title>NLP - Natural Language Processing - LIED</title>
+		<link type="text/css" href="{{ STATIC_URL }}/css/style.css" rel="stylesheet" />
+		
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui/jquery-ui.min.css" />
+		<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+		<script src="{{ STATIC_URL }}js/jquery-ui.min.js"></script>
+
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<div class="title">
+					<h1>NLP - Natural Language Processing - LIED</h1>
+				</div>
+				<div class="menu">
+					<ul>
+						<li>
+							<a href="{% url mail:inbox %}">Inbox</a>
+						</li>
+						<li>
+							<a href="{% url mail:send_mail %}">Simulate sending e-mail</a>
+						</li>						
+						
+						<li>
+							<a href="#">Processamento</a>
+						</li>
+						<li>
+							<a href="#">NLP</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="content">
+				{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+						{{ message }}</li>
+						{% endfor %}
+				</ul>
+				{% endif %}
+				
+				{% block content %}{% endblock %}
+			</div>
+
+			<div id="footer">
+				<p>
+					UFES - Universidade Federal do Espírito Santo
+				</p>
+				<p>
+					LIED - Laboratório de Informática na Educação
+				</p>
+				<p>
+					Desenvolvido por: Jordano Celestrini
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
