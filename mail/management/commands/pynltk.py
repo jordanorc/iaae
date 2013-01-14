@@ -23,4 +23,4 @@ class Command(BaseCommand):
                 NLTK_DATAPATH = settings.NLTK_DATAPATH
             else:
                 NLTK_DATAPATH = os.path.join(os.path.dirname(py_nltk.__file__), "data")
-            py_nltk.download('all', download_dir=NLTK_DATAPATH)
+            py_nltk.download(['punkt', 'floresta', 'mac_morpho'], download_dir=NLTK_DATAPATH)

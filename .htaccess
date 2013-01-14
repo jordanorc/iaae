@@ -28,7 +28,7 @@ RewriteEngine On
 #
 # Example:
 #   Alias /myrailsapp /path/to/myrailsapp/public
-RewriteBase /
+RewriteBase /~jordanorc/nlp/
 
 RewriteRule ^(static/.*)$ - [L]
 
