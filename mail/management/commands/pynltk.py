@@ -27,3 +27,4 @@ class Command(BaseCommand):
             installed = all(py_nltk.downloader._downloader.is_installed(package) for package in required_packages)
             if not installed:
                 py_nltk.download(required_packages, download_dir=NLTK_DATAPATH)
+

@@ -147,5 +147,3 @@ def clean():
     """
     with cd(env.path):
         run("rm -rf %(virtualhost_path)s" % env)
-
-

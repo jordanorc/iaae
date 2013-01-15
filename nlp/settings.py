@@ -167,3 +167,4 @@ try:
     ETIQUETADOR = UnigramTagger(sentencas_treinadoras)
 except LookupError:
     pass
+

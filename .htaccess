@@ -31,7 +31,7 @@ RewriteEngine On
 RewriteBase /~jordanorc/nlp/
 
 RewriteRule ^(static/.*)$ - [L]
-
+ 
 <IfModule mod_fastcgi.c>
     RewriteRule ^dispatch\.fcgi/ - [L]
     RewriteRule ^(.*)$ dispatch.fcgi/$1 [QSA,L]
