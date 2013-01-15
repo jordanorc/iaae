@@ -158,8 +158,12 @@ LOGGING = {
 import nltk
 NLTK_DATAPATH = os.path.join(os.path.dirname(nltk.__file__), "data")
 nltk.data.path = [NLTK_DATAPATH]
-from nltk.tag import UnigramTagger
-from nltk.corpus import mac_morpho
+ETIQUETADOR = None
 
-sentencas_treinadoras = mac_morpho.tagged_sents()[0:100]
-ETIQUETADOR = UnigramTagger(sentencas_treinadoras)
+try:
+    from nltk.tag import UnigramTagger
+    from nltk.corpus import mac_morpho
+    sentencas_treinadoras = mac_morpho.tagged_sents()[0:100]
+    ETIQUETADOR = UnigramTagger(sentencas_treinadoras)
+except LookupError:
+    pass
