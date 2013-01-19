@@ -129,7 +129,7 @@ def setup():
         easy_install('virtualenv')
 
     # check last version of distribute
-    easy_install('distribute')
+    #easy_install('distribute', force_upgrade=True)
 
     #verify pip
     if not command_exists('pip'):
