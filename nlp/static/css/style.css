@@ -43,20 +43,24 @@ h4, h5, h6 {
 	padding: 0;
 }
 
-form label {
+form.form-default label {
 	display: block;
 	float: left;
 	margin-right: 10px;
 	padding-right: 10px;
 	position: relative;
-	text-align: right;
-	width: 150px;
+	text-align: left;
+	width: 80px;
 }
-form textarea, input {
+form.form-default div {
+	margin-bottom: 10px;
+}
+form.form-default input {
 	border: 2px solid #666666;
+	width: 70%;
 }
 
-form textarea:focus {
+form.form-default textarea:focus {
 	background: #FFFFCC;
 	border: 2px solid #FFCC66;
 }
@@ -91,8 +95,8 @@ form textarea:focus {
 	width: 976px;
 	margin: 0 auto;
 	position: relative;
-	min-height: 100%;
-	height: 100%;
+	/*min-height: 100%;
+	 height: 100%;*/
 }
 
 #header .title {
@@ -126,7 +130,7 @@ form textarea:focus {
 }
 
 #content li {
-	margin-left: 20px;
+	/*margin-left: 20px;*/
 }
 
 table.email_list, table.email_list td {
@@ -152,7 +156,10 @@ table.email_list {
 	table-layout: fixed;
 }
 table.email_list td.email_mark {
-	width: 5%;
+	width: 10%;
+}
+table.email_list td.email_mark input, table.email_list td.email_mark div {
+	float: left;
 }
 table.email_list td.email_name {
 	width: 20%;
@@ -162,7 +169,7 @@ table.email_list td.email_name {
 	padding-right: 20px;
 }
 table.email_list td.email_subject {
-	width: 55%;
+	width: 50%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -178,8 +185,50 @@ table.email_list tr {
 	cursor: pointer;
 }
 
+.compose-email textarea {
+	width: 99%;
+	height: 300px;
+}
+
 .toolbar {
 	padding: 4px 4px;
 	position: relative;
 	margin-bottom: 20px;
+}
+
+ul.messages {
+	font-weight: bold;
+	font-size: 130%;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+
+ul.messages li {
+	list-style: none;
+	margin: 0;
+	padding: 5px 10px;
+}
+
+ul.messages li.error {
+	border: #D8000C 1px solid;
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+ul.messages li.info {
+	border: #4F8A10 1px solid;
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+ul.messages li.success {
+	border: #4F8A10 1px solid;
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+ul.messages li.warning {
+	border: #FC6 1px solid;
+	background-color: #FFC;
+	color: #9F6000;
 }
