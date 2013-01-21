@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView
 from django.views.generic.detail import DetailView
@@ -8,6 +9,7 @@ from django.views.generic.edit import FormView
 from mail.forms import SendMailForm, ReplyEmailForm, EmailActionForm, \
     ACTION_TRASH, ACTION_MARK_AS_SPAM, ACTION_MARK_AS_READ, ACTION_MARK_AS_IMPORTANT
 from mail.models import Email
+from util.forms.multi import MultiFormView, FormProvider
 
 class SendMailView(CreateView):
     form_class = SendMailForm
@@ -71,14 +73,18 @@ class InboxView(ListView, FormView):
                           % {'class_name': self.__class__.__name__})
         return FormView.post(self, request, *args, **kwargs)
     
-class MailView(DetailView, FormView):
+class MailView(DetailView, MultiFormView):
     model = Email
     template_name = 'mail/mail.html' 
-    form_class = ReplyEmailForm
+    forms = {
+         'reply': FormProvider(ReplyEmailForm, 'form'),
+         'action': FormProvider(EmailActionForm, 'form'),
+     }
+    groups = {'reply': ('reply',), 'action': ('action', )}
     
-    def form_valid(self, form):
+    def valid_reply(self, forms):
         import copy
-        cleaned_data = form.cleaned_data
+        cleaned_data = forms['reply'].cleaned_data
         
         resposta = copy.deepcopy(self.object)
         resposta.id = None
@@ -86,23 +92,17 @@ class MailView(DetailView, FormView):
         resposta.parent = self.object
         resposta.full_clean()
         resposta.save()
-        
-        print resposta
-        
-        return FormView.form_valid(self, form)
     
     def get_success_url(self):
         return reverse('mail:mail', args=(self.object.pk,))
     
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return FormView.post(self, request, *args, **kwargs)
+        return MultiFormView.post(self, request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
+        forms = MultiFormView.construct_forms(self)
         data = DetailView.get_context_data(self, object=self.object)
-        print data
-        data['form'] = form
+        data.update(forms)
         return data
     
