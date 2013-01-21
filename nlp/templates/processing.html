@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %} 
+{{ wizard.form.media }}
+<div style="float:left; margin-right: 30px;">
+<img src="{{ STATIC_URL }}img/processing/step-1.png"></img>
+</div>
+
+<p>
+	Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}
+</p>
+
+{% if wizard.steps.step1 == 1 %}
+<form action="." method="POST">
+	{% csrf_token %}
+
+	<table class="email_list">
+		{% for mail in emails %}
+		<tr>
+			<td class="email_mark">
+				<input name="step_one-email" value="{{ mail.pk }}" type="radio" />
+				{% if mail.spam %}
+				<div class="ui-icon ui-icon-notice"></div>
+				{% endif %}
+				{% if mail.important %}
+				<div class="ui-icon ui-icon-star"></div>
+				{% endif %}
+				{% if mail.trash %}
+				<div class="ui-icon ui-icon-trash"></div>
+				{% endif %}
+			</td>
+			<td onclick="window.location = './{{ mail.pk }}'" class="email_subject{% if not mail.read %} unread{%endif%}">{{ mail.title }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+		{{ wizard.management_form }}
+		{% if wizard.form.forms %}
+		{{ wizard.form.management_form }}
+		{% for form in wizard.form.forms %}
+		{{ form }}
+		{% endfor %}
+		{% endif %}
+	<input type="submit" value="{% trans "next step" %}"/>
+</form>
+
+{% else %}
+<form action="" method="post">
+	{% csrf_token %}
+	<table>
+		{{ wizard.management_form }}
+		{% if wizard.form.forms %}
+		{{ wizard.form.management_form }}
+		{% for form in wizard.form.forms %}
+		{{ form }}
+		{% endfor %}
+		{% else %}
+		{{ wizard.form }}
+		{% endif %}
+	</table>
+	{% if wizard.steps.prev %}
+	<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">
+		{% trans "first step" %}
+	</button>
+	<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">
+		{% trans "prev step" %}
+	</button>
+	{% endif %}
+	<input type="submit" value="{% trans "next step" %}"/>
+</form>
+{% endif %}
+
+<br style="clear: both;"/>
+{% endblock %}
