@@ -35,7 +35,7 @@ class Visl(object):
             else:
                 tags.append(word.findAllNext('font')[0].text)
                 tags.append(word.findAllNext('font')[0].text)
-                print tags
+                
             tagged_text.append(tags)
 
         return tagged_text

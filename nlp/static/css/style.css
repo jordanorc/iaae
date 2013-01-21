@@ -195,7 +195,7 @@ table.email_list tr {
 	position: relative;
 	margin-bottom: 20px;
 }
-
+/* messages */
 ul.messages {
 	font-weight: bold;
 	font-size: 130%;
@@ -231,4 +231,25 @@ ul.messages li.warning {
 	border: #FC6 1px solid;
 	background-color: #FFC;
 	color: #9F6000;
+}
+
+div.processing {
+	
+}
+
+div.processing div.left-column {
+	float:left; 
+	margin-right: 30px;
+	width: 340px;
+	height: 575px;
+}
+
+div.processing div.right-column {
+	width: 556px;
+	float:left;
+}
+
+div.processing #steps_toolbar {
+	margin-top: 20px;
+	
 }

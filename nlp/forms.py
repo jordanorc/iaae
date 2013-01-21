@@ -21,18 +21,25 @@ class ProcessingStepFourForm(forms.Form):
     next = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
 class ProcessingWizard(SessionWizardView):
-    template_name="processing.html"
+    template_name = "processing.html"
     form_list = (ProcessingStepOneForm, ProcessingStepTwoForm)
     
     def get_context_data(self, form, **kwargs):
         context = super(ProcessingWizard, self).get_context_data(form=form, **kwargs)
         if self.steps.current == 'step_one':
             context.update({'emails': Email.objects.all()})
+        elif self.steps.current == 'step_two':
+            cleaned_data = self.get_cleaned_data_for_step(self.steps.prev)
+            context.update({'email': cleaned_data['email']})
+            
         return context
     
+    def get_template_names(self):
+        return ["steps/%s.html" % (self.steps.current,)]
+    
 processing_view = ProcessingWizard.as_view((
-    ("step_one", ProcessingStepOneForm), 
-    ("step_two", ProcessingStepTwoForm), 
-    ("step_three", ProcessingStepThreeForm), 
+    ("step_one", ProcessingStepOneForm),
+    ("step_two", ProcessingStepTwoForm),
+    ("step_three", ProcessingStepThreeForm),
     ("step_four", ProcessingStepFourForm)
 ))

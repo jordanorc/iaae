@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+{{ wizard.form.media }}
+<script type="application/javascript">
+	$(function() {
+		$("button, input[type=submit]").button();
+	}); 
+</script>
+<script type="text/javascript">
+	$(function() {
+		$("#step_id").button({
+			text : true,
+		}).click(function(e) {
+			e.preventDefault();
+		});
+		
+		$("#step_first").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-seek-first"
+			}
+		}).click(function(e) {
+		});
+		
+		$("#step_prev").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-seek-prev"
+			}
+		}).click(function(e) {
+		});
+		
+		$("#step_next").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-seek-next"
+			}
+		}).click(function(e) {
+		});
+	}); 
+</script>
+<div class="processing">
+
+	<div class="left-column">
+		<img src="{{ STATIC_URL }}img/processing/{{ wizard.steps.current }}.png"></img>
+	</div>
+
+	<div class="right-column">
+		<h1>Processing Step {{ wizard.steps.step1 }}</h1>
+
+		{% block step_description %}
+		{% endblock %}
+
+		{% block step_content %}
+		<form action="" method="post">
+			{% csrf_token %}
+			<table>
+				{{ wizard.management_form }}
+				{% if wizard.form.forms %}
+				{{ wizard.form.management_form }}
+				{% for form in wizard.form.forms %}
+				{{ form }}
+				{% endfor %}
+				{% else %}
+				{{ wizard.form }}
+				{% endif %}
+			</table>
+
+			<div id="steps_toolbar" class="toolbar ui-widget-header ui-corner-all">
+				<button type="submit" id="step_next">
+					{% trans "Next Step" %}
+				</button>
+				{% if wizard.steps.prev %}
+				<button id="step_prev" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">
+					{% trans "Prev Step" %}
+				</button>				
+				<button id="step_first" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">
+					{% trans "First Step" %}
+				</button>
+				{% endif %}
+				<button id="step_id">
+					Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}
+				</button>
+			</div>
+		</form>
+		{% endblock %}
+	</div>
+</div>
+<br style="clear: both;"/>
+{% endblock %}

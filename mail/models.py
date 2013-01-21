@@ -30,7 +30,6 @@ class Email(models.Model):
 
     @property
     def respondido(self):
-        print self.threads.count()
         return self.threads.count() > 0
         
     def __unicode__(self):
