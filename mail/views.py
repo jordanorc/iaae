@@ -6,13 +6,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
-from mail.forms import SendMailForm, ReplyEmailForm, EmailActionForm
+from mail.forms import SendMailForm, ReplyEmailForm, EmailActionForm, \
+    EmailMarkForm
 from mail.models import Email, EMAIL_TAGS
 from util.forms.multi import MultiFormView, FormProvider
 
 class ComposeMailView(CreateView):
     form_class = SendMailForm
-    template_name = 'mail/send.html'
+    template_name = 'mail/compose.html'
     
     def form_valid(self, form):
         messages.success(self.request, _(u'Your message has been sent'))
@@ -77,7 +78,7 @@ class MailView(DetailView, MultiFormView):
     template_name = 'mail/mail.html' 
     forms = {
          'reply': FormProvider(ReplyEmailForm, 'form'),
-         'action': FormProvider(EmailActionForm, 'form'),
+         'action': FormProvider(EmailMarkForm, 'form'),
      }
     groups = {'reply': ('reply',), 'action': ('action', )}
     
@@ -91,11 +92,16 @@ class MailView(DetailView, MultiFormView):
         resposta.parent = self.object
         resposta.full_clean()
         resposta.save()
-    
+        
+    def valid_action(self, forms):
+        cleaned_data = forms['action'].cleaned_data
+        print cleaned_data
+        
     def get_success_url(self):
         return reverse('mail:mail', args=(self.object.pk,))
     
     def post(self, request, *args, **kwargs):
+        print "aqui"
         self.object = self.get_object()
         return MultiFormView.post(self, request, *args, **kwargs)
     
@@ -103,5 +109,6 @@ class MailView(DetailView, MultiFormView):
         forms = MultiFormView.construct_forms(self)
         data = DetailView.get_context_data(self, object=self.object)
         data.update(forms)
+        data['EMAIL_TAGS'] = EMAIL_TAGS
         return data
     

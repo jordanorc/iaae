@@ -10,6 +10,10 @@ class SendMailForm(forms.ModelForm):
 class ReplyEmailForm(forms.Form):
     
     message = forms.CharField(widget=forms.Textarea)
+    
+class EmailMarkForm(forms.Form):
+
+    tag = forms.ChoiceField(choices=EMAIL_TAGS, widget=forms.HiddenInput)
 
 class EmailActionForm(forms.Form):
     

@@ -7,6 +7,8 @@
 {% block inlinejs %}
 <script type="text/javascript">
 	$(function() {
+		var action_form = $("#action-form");
+		
 		$("#back").button({
 			text : false,
 			icons : {
@@ -28,8 +30,10 @@
 			icons : {
 				primary : "ui-icon-trash"
 			}
-		}).click(function() {
-
+		}).click(function(event) {
+			event.preventDefault();
+			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.TRASH }});
+			action_form.submit();
 		});
 
 		$("#span").button({
@@ -37,8 +41,10 @@
 			icons : {
 				primary : "ui-icon-notice"
 			}
-		}).click(function() {
-
+		}).click(function(event) {
+			event.preventDefault();
+			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.SPAM }});
+			action_form.submit();
 		});
 
 		$("#important").button({
@@ -46,8 +52,10 @@
 			icons : {
 				primary : "ui-icon-star"
 			}
-		}).click(function() {
-
+		}).click(function(event) {
+			event.preventDefault();
+			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.IMPORTANT }});
+			action_form.submit();
 		});
 
 		$("#send").button({
@@ -102,23 +110,27 @@
 {% endblock %}
 
 {% block content %}
-<div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
-	<button id="back">
-		Back to Inbox
-	</button>
-	<button id="compose">
-		Compose
-	</button>
-	<button id="trash">
-		Trash
-	</button>
-	<button id="span">
-		Mark as Span
-	</button>
-	<button id="important">
-		Mark as Important
-	</button>
-</div>
+<form id="action-form" action="." method="post">
+	{% csrf_token %}
+	{{ action_form }}
+	<div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
+		<button id="back">
+			Back to Inbox
+		</button>
+		<button id="compose">
+			Compose
+		</button>
+		<button id="trash">
+			Trash
+		</button>
+		<button id="span">
+			Mark as Span
+		</button>
+		<button id="important">
+			Mark as Important
+		</button>
+	</div>
+</form>
 <h1>{{ object.subject }}</h1>
 <h4>Sent by {{ object.from_name }}&lt;{{ object.from_email }}&gt; on {{ object.date }}</h4>
 
@@ -131,7 +143,7 @@
 {% endfor %}
 {% else %}
 
-<form class="compose-email" action="." method="post">
+<form id="reply-mail" class="compose-email" action="." method="post">
 	{% csrf_token %}
 	<div id="reply_toolbar" class="toolbar ui-widget-header ui-corner-all">
 		<button id="send">

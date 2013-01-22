@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 
 class EmailManager(models.Manager):
     
@@ -82,7 +83,7 @@ class Email(models.Model):
     
     @property
     def title(self):
-        return "%s - %s" % (self.subject, strip_tags(self.message))[0:65]
+        return mark_safe("%s - %s" % (self.subject, strip_tags(self.message))[0:65])
 
     @property
     def respondido(self):
