@@ -95,13 +95,25 @@ class MailView(DetailView, MultiFormView):
         
     def valid_action(self, forms):
         cleaned_data = forms['action'].cleaned_data
-        print cleaned_data
+        
+        tag = int(cleaned_data["tag"])
+        
+        if tag == EMAIL_TAGS.TRASH:
+            messages.success(self.request, _(u'The message has been moved to the Trash.'))
+
+        elif tag == EMAIL_TAGS.SPAM:
+            messages.success(self.request, _(u'The message has been marked as spam.'))
+            
+        elif tag == EMAIL_TAGS.READ:
+            messages.success(self.request, _(u'The message has been marked as read.'))
+            
+        elif tag == EMAIL_TAGS.IMPORTANT:
+            messages.success(self.request, _(u'The message has been marked as important.'))
         
     def get_success_url(self):
         return reverse('mail:mail', args=(self.object.pk,))
     
     def post(self, request, *args, **kwargs):
-        print "aqui"
         self.object = self.get_object()
         return MultiFormView.post(self, request, *args, **kwargs)
     

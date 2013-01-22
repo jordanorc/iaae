@@ -6,7 +6,7 @@
 <p>Nesta etapa, o e-mail é processado e etiquetado.</p>
 
 <h3>Mensagem original</h3>
-<p>{{email.message}}</p>
+<p>{{email.message|safe}}</p>
 
 <h3>Mensagem etiquetada</h3>
 {% for word in email_tagged %}

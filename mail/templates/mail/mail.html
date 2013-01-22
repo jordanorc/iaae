@@ -14,7 +14,8 @@
 			icons : {
 				primary : "ui-icon ui-icon-arrowthick-1-w"
 			}
-		}).click(function() {
+		}).click(function(event) {
+			event.preventDefault();
 			window.location = "{% url mail:inbox %}"
 		});
 		$("#compose").button({
@@ -32,7 +33,7 @@
 			}
 		}).click(function(event) {
 			event.preventDefault();
-			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.TRASH }});
+			action_form.children('input[name=action-tag]').val({{ EMAIL_TAGS.TRASH }});
 			action_form.submit();
 		});
 
@@ -43,7 +44,7 @@
 			}
 		}).click(function(event) {
 			event.preventDefault();
-			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.SPAM }});
+			action_form.children('input[name=action-tag]').val({{ EMAIL_TAGS.SPAM }});
 			action_form.submit();
 		});
 
@@ -54,7 +55,7 @@
 			}
 		}).click(function(event) {
 			event.preventDefault();
-			action_form.children('input[name=tag]').val({{ EMAIL_TAGS.IMPORTANT }});
+			action_form.children('input[name=action-tag]').val({{ EMAIL_TAGS.IMPORTANT }});
 			action_form.submit();
 		});
 
@@ -139,7 +140,7 @@
 <h1>Reply</h1>
 {% if object.respondido %}
 {% for thread in object.threads.all %}
-{{ thread.message }}
+{{ thread.message|safe }}
 {% endfor %}
 {% else %}
 

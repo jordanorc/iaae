@@ -156,7 +156,7 @@ table.email_list {
 	table-layout: fixed;
 }
 table.email_list td.email_mark {
-	width: 10%;
+	width: 15%;
 }
 table.email_list td.email_mark input, table.email_list td.email_mark div {
 	float: left;
@@ -169,7 +169,7 @@ table.email_list td.email_name {
 	padding-right: 20px;
 }
 table.email_list td.email_subject {
-	width: 50%;
+	width: 45%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

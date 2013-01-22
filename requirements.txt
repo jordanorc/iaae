@@ -3,4 +3,5 @@ south
 nltk
 BeautifulSoup
 flup
+pyaiml
 
