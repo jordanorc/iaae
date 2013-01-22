@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block extrahead %} 
+	<script type="text/javascript" src="{{ STATIC_URL }}js/tiny_mce/jquery.tinymce.js"></script>
+{% endblock %}
 
-<script type="text/javascript" src="{{ STATIC_URL }}js/tiny_mce/jquery.tinymce.js"></script>
-
+{% block inlinejs %}
 <script type="text/javascript">
 	$(function() {
 		$("#back").button({
@@ -20,7 +21,7 @@
 				primary : "ui-icon-mail-closed"
 			}
 		}).click(function() {
-			window.location = "{% url mail:send_mail %}"
+			window.location = "{% url mail:compose %}"
 		});
 		$("#trash").button({
 			text : false,
@@ -28,9 +29,8 @@
 				primary : "ui-icon-trash"
 			}
 		}).click(function() {
-			
-		});
 
+		});
 
 		$("#span").button({
 			text : false,
@@ -38,7 +38,7 @@
 				primary : "ui-icon-notice"
 			}
 		}).click(function() {
-			
+
 		});
 
 		$("#important").button({
@@ -47,11 +47,9 @@
 				primary : "ui-icon-star"
 			}
 		}).click(function() {
-			
+
 		});
-		
-		
-		
+
 		$("#send").button({
 			text : true,
 			icons : {
@@ -66,10 +64,9 @@
 				primary : "ui-icon-trash"
 			}
 		}).click(function() {
-			window.location = "{% url mail:send_mail %}"
+			window.location = "{% url mail:compose %}"
 		});
-		
-		
+
 		$('.compose-email textarea').tinymce({
 			// Location of TinyMCE script
 			script_url : '{{ STATIC_URL }}js/tiny_mce/tiny_mce.js',
@@ -96,12 +93,15 @@
 			external_link_list_url : "lists/link_list.js",
 			external_image_list_url : "lists/image_list.js",
 			media_external_list_url : "lists/media_list.js",
-			
-		});
-							
-	}); 
-</script>
 
+		});
+
+	});
+
+</script>
+{% endblock %}
+
+{% block content %}
 <div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
 	<button id="back">
 		Back to Inbox
@@ -109,7 +109,6 @@
 	<button id="compose">
 		Compose
 	</button>
-
 	<button id="trash">
 		Trash
 	</button>
@@ -120,29 +119,30 @@
 		Mark as Important
 	</button>
 </div>
-
 <h1>{{ object.subject }}</h1>
 <h4>Sent by {{ object.from_name }}&lt;{{ object.from_email }}&gt; on {{ object.date }}</h4>
 
-{{ object.message }}
+{{ object.message|safe }} 
 
 <h1>Reply</h1>
 {% if object.respondido %}
-	{% for thread in object.threads.all %}
-		{{ thread.message }}
-	{% endfor %}
+{% for thread in object.threads.all %}
+{{ thread.message }}
+{% endfor %}
 {% else %}
-	<form class="compose-email" action="." method="post">{% csrf_token %}
-		<div id="reply_toolbar" class="toolbar ui-widget-header ui-corner-all">
-			<button id="send">
-				Send
-			</button>
-			<button id="cancel">
-				Cancel
-			</button>
-		</div>
-		{{ reply_form.message }}
-		{{ reply_form.message.errors }}
-	</form>
+
+<form class="compose-email" action="." method="post">
+	{% csrf_token %}
+	<div id="reply_toolbar" class="toolbar ui-widget-header ui-corner-all">
+		<button id="send">
+			Send
+		</button>
+		<button id="cancel">
+			Cancel
+		</button>
+	</div>
+	{{ reply_form.message }}
+	{{ reply_form.message.errors }}
+</form>
 {% endif %}
-{% endblock %}
+{% endblock %} 

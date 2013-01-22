@@ -253,3 +253,20 @@ div.processing #steps_toolbar {
 	margin-top: 20px;
 	
 }
+
+/* email tags icons */
+.ui-icon-tag-1 {
+    background-position: -176px -96px;
+}
+.ui-icon-tag-2 {
+    background-position: -96px -96px;
+}
+.ui-icon-tag-3 {
+    background-position: -32px -144px;
+}
+.ui-icon-tag-4 {
+    background-position: -224px -112px;
+}
+.ui-icon-tag-5 {
+    background-position: -48px -144px;
+}

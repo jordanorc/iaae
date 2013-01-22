@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block extrahead %} 
+	<script type="text/javascript" src="{{ STATIC_URL }}js/tiny_mce/jquery.tinymce.js"></script>
+{% endblock %}
 
+{% block inlinejs %}
 <script type="text/javascript">
 	$(function() {
 		$("#back").button({
@@ -28,12 +31,7 @@
 		}).click(function() {
 			window.location = "{% url mail:inbox %}"
 		});
-	}); 
-</script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}js/tiny_mce/jquery.tinymce.js"></script>
-<script type="text/javascript">
-	$().ready(function() {
+		
 		$('.compose-email textarea').tinymce({
 			// Location of TinyMCE script
 			script_url : '{{ STATIC_URL }}js/tiny_mce/tiny_mce.js',
@@ -62,9 +60,12 @@
 			media_external_list_url : "lists/media_list.js",
 			
 		});
-	});
+	}); 
 </script>
 
+{% endblock %}
+
+{% block content %}
 <div id="mail_toolbar" class="toolbar ui-widget-header ui-corner-all">
 	<button id="back">
 		Back to Inbox

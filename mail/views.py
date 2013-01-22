@@ -6,26 +6,23 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
-from mail.forms import SendMailForm, ReplyEmailForm, EmailActionForm, \
-    ACTION_TRASH, ACTION_MARK_AS_SPAM, ACTION_MARK_AS_READ, ACTION_MARK_AS_IMPORTANT
-from mail.models import Email
+from mail.forms import SendMailForm, ReplyEmailForm, EmailActionForm
+from mail.models import Email, EMAIL_TAGS
 from util.forms.multi import MultiFormView, FormProvider
 
-class SendMailView(CreateView):
+class ComposeMailView(CreateView):
     form_class = SendMailForm
     template_name = 'mail/send.html'
     
     def form_valid(self, form):
         messages.success(self.request, _(u'Your message has been sent'))
-        return super(SendMailView, self).form_valid(form)
+        return super(ComposeMailView, self).form_valid(form)
     
     def get_success_url(self):
-        return reverse('mail:send_mail')
+        return reverse('mail:inbox')
     
 def ReplyEmailView(FormView):
     form = ReplyEmailForm
-    
-    
 
 class InboxView(ListView, FormView):
     model = Email
@@ -38,27 +35,29 @@ class InboxView(ListView, FormView):
         form = self.get_form(form_class)
         data = ListView.get_context_data(self, object_list=self.object_list)
         data['form'] = form
+        data['EMAIL_TAGS'] = EMAIL_TAGS
         return data 
     
     def form_valid(self, form):
         cleaned_data = form.cleaned_data
         
         emails = cleaned_data['emails']
-        if int(cleaned_data['action']) == ACTION_TRASH:
-            emails.update(trash=True)
+        tag = int(cleaned_data['tag'])
+        
+        for email in emails:
+            email.mark(tag)
+        
+        if tag == EMAIL_TAGS.TRASH:
             messages.success(self.request, _(u'The message has been moved to the Trash.'))
-            
-        elif int(cleaned_data['action']) == ACTION_MARK_AS_SPAM:
-            emails.update(spam=True)
+
+        elif tag == EMAIL_TAGS.SPAM:
             messages.success(self.request, _(u'The message has been marked as spam.'))
             
-        elif int(cleaned_data['action']) == ACTION_MARK_AS_READ:
-            emails.update(read=True)
+        elif tag == EMAIL_TAGS.READ:
             messages.success(self.request, _(u'The message has been marked as read.'))
             
-        elif int(cleaned_data['action']) == ACTION_MARK_AS_IMPORTANT:
+        elif tag == EMAIL_TAGS.IMPORTANT:
             messages.success(self.request, _(u'The message has been marked as important.'))
-            emails.update(important=True)
         
         return FormView.form_valid(self, form)
     

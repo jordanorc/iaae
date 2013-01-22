@@ -1,45 +1,20 @@
 # -*- coding: utf-8 -*-
-from nlp.forms import NlpForm
-from django.views.generic.edit import FormView
-from django.core.urlresolvers import reverse
-from nltk.tag import UnigramTagger
-from nltk.corpus import mac_morpho
-import nltk
 from django.conf import settings
-from BeautifulSoup import BeautifulSoup
-import urllib
-import urllib2
+from django.contrib.formtools.wizard.views import SessionWizardView
+from django.core.urlresolvers import reverse
+from django.views.generic.base import RedirectView
+from django.views.generic.edit import FormView
+from mail.models import Email
+from nlp.forms import NlpForm, ProcessingStepOneForm, ProcessingStepTwoForm, \
+    ProcessingStepThreeForm, ProcessingStepFourForm
+from nlp.visl import Visl
+from nltk.corpus import stopwords
+import nltk
 
-class Visl(object):
-
-    url = "http://beta.visl.sdu.dk/visl/pt/parsing/automatic/parse.php"
-    params = {'inputlang': 'pt', 'parser': 'morphdis', 'visual': 'niceline'}
-
-    def tag(self, text):
-        params = self.params.copy()
-        params['text'] = text.encode('utf-8')
-        params = urllib.urlencode(params)
-        req = urllib2.Request(self.url, params)
-        response = urllib2.urlopen(req).read()
-
-        soup = BeautifulSoup(response, convertEntities=BeautifulSoup.HTML_ENTITIES)
-
-        tagged_text = []
-        for word in soup.find('dl').findAllNext('dt'):
-            tags = []
-            if word.find('font', attrs={'color': 'blue'}):
-                tags.append(word.findAllNext('font')[0].text)
-                tags.append(word.findAllNext('font')[2].findNext('b').extract().text)
-                tags.append(word.findAllNext('font')[1].text)
-                tags.append(word.findAllNext('font')[2].text)
-            else:
-                tags.append(word.findAllNext('font')[0].text)
-                tags.append(word.findAllNext('font')[0].text)
-                
-            tagged_text.append(tags)
-
-        return tagged_text
-
+class IndexView(RedirectView):
+    
+    def get_redirect_url(self):
+        return reverse("mail:inbox")
 
 class NlpView(FormView):
     template_name = 'nlp.html'
@@ -71,9 +46,7 @@ class NlpView(FormView):
         context['show_sentences'] = True
 
         self.request.session['context'] = context
-
-        #print etiquetador.evaluate(sentencas_treinadoras)
-
+        
         return super(NlpView, self).form_valid(form)
     
     def get_initial(self):
@@ -90,3 +63,40 @@ class NlpView(FormView):
 
     def get_success_url(self):
         return reverse('nlp_view')
+
+
+class ProcessingWizard(SessionWizardView):
+    template_name = "processing.html"
+    form_list = (ProcessingStepOneForm, ProcessingStepTwoForm)
+    
+    def get_context_data(self, form, **kwargs):
+        context = super(ProcessingWizard, self).get_context_data(form=form, **kwargs)
+        if self.steps.current == 'step_one':
+            context.update({'emails': Email.objects.all()})
+        elif self.steps.current == 'step_two':
+            cleaned_data = self.get_cleaned_data_for_step(self.steps.prev)
+            email = cleaned_data['email']
+            
+            visl = Visl()
+            context['email_tagged'] = visl.tag(email.raw_message)
+            
+            filtered_message = email.raw_message.split(" ") #make a copy of the word_list
+            for key, word in enumerate(filtered_message): # iterate over word_list
+                if word in stopwords.words('portuguese'): 
+                    filtered_message[key] = "*"
+                    
+            context['filtered_message'] = " ".join(filtered_message)
+            
+            context.update({'email': cleaned_data['email']})
+            
+        return context
+    
+    def get_template_names(self):
+        return ["steps/%s.html" % (self.steps.current,)]
+    
+processing_view = ProcessingWizard.as_view((
+    ("step_one", ProcessingStepOneForm),
+    ("step_two", ProcessingStepTwoForm),
+    ("step_three", ProcessingStepThreeForm),
+    ("step_four", ProcessingStepFourForm)
+))

@@ -2,7 +2,8 @@
 *.pyc
 .settings/
 .project
-.pydevproject*/media/CACHE/*
+.pydevproject
+*/media/CACHE/*
 static_files/
 logs/
 */doc/_build/*

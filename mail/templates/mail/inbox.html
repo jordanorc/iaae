@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
-
+{% block inlinejs %}
 <script type="text/javascript">
 	$(function() {
 		var mark_all = true;
@@ -13,7 +12,7 @@
 			}
 		}).click(function(e) {
 			e.preventDefault();
-			window.location = "{% url mail:send_mail %}"
+			window.location = "{% url mail:compose %}"
 		});
 		
 		$("#mark").button({
@@ -41,7 +40,7 @@
 			}
 		}).click(function(e) {
 			e.preventDefault();
-			$(this).closest('form').children('input[name=action]').val(1);
+			$(this).closest('form').children('input[name=tag]').val({{ EMAIL_TAGS.TRASH }});
 			$(this).closest('form').submit();
 		});
 
@@ -53,7 +52,7 @@
 			}
 		}).click(function(e) {
 			e.preventDefault();
-			$(this).closest('form').children('input[name=action]').val(2);
+			$(this).closest('form').children('input[name=tag]').val({{ EMAIL_TAGS.SPAM }});
 			$(this).closest('form').submit();			
 		});
 
@@ -64,7 +63,7 @@
 			}
 		}).click(function(e) {
 			e.preventDefault();
-			$(this).closest('form').children('input[name=action]').val(3);
+			$(this).closest('form').children('input[name=tag]').val({{ EMAIL_TAGS.READ }});
 			$(this).closest('form').submit();			
 		});
 
@@ -75,12 +74,15 @@
 			}
 		}).click(function(e) {
 			e.preventDefault();
-			$(this).closest('form').children('input[name=action]').val(4);
+			$(this).closest('form').children('input[name=tag]').val({{ EMAIL_TAGS.IMPORTANT }});
 			$(this).closest('form').submit();			
 		});
 							
 	}); 
 </script>
+{% endblock %}
+
+{% block content %}
 <form action="." method="POST">
 	{% csrf_token %}
 	<div id="inbox_toolbar" class="toolbar ui-widget-header ui-corner-all">
@@ -104,26 +106,23 @@
 			Mark as important
 		</button>
 	</div>
-	{{ form.action }}
+	{{ form.tag }}
 	<table class="email_list">
 		{% for mail in object_list %}
 		<tr>
 			<td class="email_mark">
 				<input name="emails" value="{{ mail.pk }}" type="checkbox" />
-				{% if mail.spam %}
-				<div class="ui-icon ui-icon-notice"></div>
-				{% endif %}
-				{% if mail.important %}
-				<div class="ui-icon ui-icon-star"></div>
-				{% endif %}
-				{% if mail.trash %}
-				<div class="ui-icon ui-icon-trash"></div>
-				{% endif %}
-				
+				{% for tag in mail.tags.all %}
+					<div class="ui-icon ui-icon-tag-{{ tag.tag }}"></div>
+				{% endfor %}			
 			</td>
 			<td onclick="window.location = './{{ mail.pk }}'" class="email_name{% if not mail.read %} unread{%endif%}">{{ mail.from_name }}</td>
 			<td onclick="window.location = './{{ mail.pk }}'" class="email_subject{% if not mail.read %} unread{%endif%}">{{ mail.title }}</td>
 			<td onclick="window.location = './{{ mail.pk }}'" class="email_date{% if not mail.read %} unread{%endif%}">{{ mail.date }}</td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td>Não existem mensagens em sua caixa de entrada</td>
 		</tr>
 		{% endfor %}
 	</table>

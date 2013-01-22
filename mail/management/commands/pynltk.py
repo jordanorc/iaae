@@ -23,8 +23,8 @@ class Command(BaseCommand):
                 NLTK_DATAPATH = settings.NLTK_DATAPATH
             else:
                 NLTK_DATAPATH = os.path.join(os.path.dirname(py_nltk.__file__), "data")
-            required_packages = ['punkt', 'floresta', 'mac_morpho']
-            installed = all(py_nltk.downloader._downloader.is_installed(package) for package in required_packages)
+            required_packages = ['punkt', 'floresta', 'mac_morpho', 'stopwords', 'wordnet']
+            installed = all(py_nltk.downloader._downloader.is_installed(package, download_dir=NLTK_DATAPATH) for package in required_packages)
             if not installed:
                 py_nltk.download(required_packages, download_dir=NLTK_DATAPATH)
 
