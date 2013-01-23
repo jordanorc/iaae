@@ -69,10 +69,13 @@
 				{% endblock %}
 				{% endif %}
 			</table>
-
 			<div id="steps_toolbar" class="toolbar ui-widget-header ui-corner-all">
 				<button type="submit" id="step_next">
-					{% trans "Next Step" %}
+					{% if wizard.steps.current == wizard.steps.last %}
+						{% trans "Finish" %}
+					{% else %}
+						{% trans "Next Step" %}
+					{% endif %}
 				</button>
 				{% if wizard.steps.prev %}
 				<button id="step_prev" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">

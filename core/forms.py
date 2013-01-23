@@ -12,7 +12,7 @@ class NlpForm(forms.Form):
         return super(NlpForm, self).clean()
 
 class ProcessingStepOneForm(forms.Form):
-    email = forms.ModelChoiceField(queryset=Email.objects.all())
+    email = forms.ModelChoiceField(queryset=Email.emails.all())
 
 class ProcessingStepTwoForm(forms.Form):
     next = forms.BooleanField(widget=forms.HiddenInput, initial=True)

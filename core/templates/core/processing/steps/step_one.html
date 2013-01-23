@@ -1,4 +1,4 @@
-{% extends "steps/step_base.html" %}
+{% extends "core/processing/steps/step_base.html" %}
 {% load i18n %}
 
 {% block step_description %}
@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block step_form %}
+<h1>Inbox</h1>
 <table class="email_list">
 	{% for mail in emails %}
 	<tr>
@@ -19,6 +20,10 @@
 		</td>
 		<td class="email_subject{% if not mail.read %} unread{%endif%}">{{ mail.title }}</td>
 	</tr>
-	{% endfor %}
+		{% empty %}
+		<tr>
+			<td>Não existem mensagens a serem processadas em sua caixa de entrada</td>
+		</tr>
+		{% endfor %}
 </table>
 {% endblock %}

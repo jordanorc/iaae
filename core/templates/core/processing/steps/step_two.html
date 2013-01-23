@@ -1,4 +1,4 @@
-{% extends "steps/step_base.html" %}
+{% extends "core/processing/steps/step_base.html" %}
 {% load i18n %}
 
 {% block step_description %}
@@ -9,11 +9,14 @@
 <p>{{email.message|safe}}</p>
 
 <h3>Mensagem etiquetada</h3>
-{% for word in email_tagged %}
+{% for word in email.tagged_sentences %}
 	{{ word.0 }}<strong>[{{ word.1 }}]</strong>
 {% endfor %}
 
 <h3>Mensagem processada (sem stop words)</h3>
-{{ filtered_message }}
+
+{% for aiml in email.aiml %}
+	{{ aiml.0 }}
+{% endfor %}
 
 {% endblock %}

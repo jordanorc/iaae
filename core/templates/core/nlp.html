@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block content %}
-<form id="form-nlp" action="{% url nlp_view %}" method="post">
+<form id="form-nlp" action="." method="post">
 	{% csrf_token %}
 	{{ form.text }}
 	

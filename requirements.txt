@@ -3,5 +3,4 @@ south
 nltk
 BeautifulSoup
 flup
-pyaiml
-
+http://ufpr.dl.sourceforge.net/project/pyaiml/PyAIML%20%28unstable%29/0.8.6/PyAIML-0.8.6.tar.gz
