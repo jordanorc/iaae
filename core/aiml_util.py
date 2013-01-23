@@ -13,7 +13,7 @@ def check_answer(question):
         (temp_filedescriptor, temp_filepath) = tempfile.mkstemp()
         data_file = open(temp_filepath, "w+b")
 
-        data_file.write(data.data)
+        data_file.write(data.data.encode('utf-8'))
         data_file.close()
         
         kernel.learn(temp_filepath)

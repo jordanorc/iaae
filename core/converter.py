@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.utils.encoding import force_unicode
 from xml.dom import minidom
 from xml.dom.minidom import Document
 import re
@@ -11,14 +12,14 @@ def aiml_to_question(email):
     if data.count() > 0:
         data = data[0]
         
-        doc = minidom.parseString(data.data)
+        doc = minidom.parseString(data.data.encode('utf-8'))
         
         aiml = doc.getElementsByTagName("aiml")[0]
     
         for category in aiml.getElementsByTagName("category"):
             pattern = category.getElementsByTagName("pattern")[0].firstChild.nodeValue
             template = category.getElementsByTagName("template")[0].firstChild.nodeValue
-            questions.append((pattern, template))
+            questions.append((force_unicode(pattern), force_unicode(template)))
 
     return questions
 
@@ -29,13 +30,13 @@ def xml_to_tagged_sentence(email):
     if data.count() > 0:
         data = data[0]
         
-        doc = minidom.parseString(data.data)
+        doc = minidom.parseString(data.data.encode('utf-8'))
     
         for sentence in doc.getElementsByTagName("sentence"):
             for word in sentence.getElementsByTagName("word"):
                 value = word.getElementsByTagName("value")[0].firstChild.nodeValue
                 tag = word.getElementsByTagName("tag")[0].firstChild.nodeValue
-                tagged_sentences.append((value, tag))
+                tagged_sentences.append((force_unicode(value), force_unicode(tag)))
     return tagged_sentences
 
 def tagged_sentence_to_xml(tagged_sentence):
