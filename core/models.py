@@ -33,6 +33,12 @@ def set_email_data(sender, **kwargs):
     if email.pk and not email.parent:
         email.tagged_sentences = xml_to_tagged_sentence(email)
         email.aiml = aiml_to_question(email)
+        
+        filtered_message = email.raw_message.split(" ") #make a copy of the word_list
+        for key, word in enumerate(filtered_message): # iterate over word_list
+            if word in stopwords.words('portuguese'): 
+                filtered_message[key] = "*"
+        email.filtered_message = " ".join(filtered_message)
     
 
 @receiver(post_save, sender=Email)
