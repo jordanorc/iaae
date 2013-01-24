@@ -4,4 +4,10 @@ nltk
 BeautifulSoup
 flup
 docutils
+rdflib
+pyparsing
+rdfextras
 http://ufpr.dl.sourceforge.net/project/pyaiml/PyAIML%20%28unstable%29/0.8.6/PyAIML-0.8.6.tar.gz
+http://surfrdf.googlecode.com/svn/trunk#egg=SuRF
+http://surfrdf.googlecode.com/svn/trunk/plugins/surf.rdflib#egg=surf.rdflib
+http://surfrdf.googlecode.com/svn/trunk/plugins/surf.sparql_protocol#egg=surf.sparql_protocol
