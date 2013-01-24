@@ -273,3 +273,9 @@ div.processing #steps_toolbar {
 .ui-icon-tag-6 {
     background-position: -64px -144px;
 }
+
+/* about */
+.about p {
+	margin-bottom: 10px;	
+	text-align: justify;
+} 

@@ -1,0 +1,66 @@
+SOBRE
+=====
+
+**Disciplina:** TEI - Inteligência Artificial Aplicada à Educação
+
+**Protótipo desenvolvido por:** Adriano José, Jordano Celestrini e Roberto Guimarães Morati Junior 
+
+NLP - Natural Language Processing - LIED
+========================================
+
+PROBLEMA
+--------
+
+Os mecanismos de respostas automáticas de e-mails (tais como: gmail, hotmail etc.) podem ser considerados mecanismos burros, pois não permitem que o usuário os configure para responder e-mails automaticamente com base na classificação do e-mail ou em seu conteúdo. Assim, essa situação é vista como um problema em diversos domínios, como corporativo, educacional etc. No contexto educacional, essa deficiência impede que o professor possa configurar respostas inteligentes para e-mails dos alunos, desta forma, tendo o aluno esperar por um determinado tempo até que o professor responda o e-mail de forma adequada, tempo este prejudicial.
+
+JUSTIFICATIVA
+-------------
+
+A resposta automática de e-mails se demonstra bastante limitada, permitindo apenas a criação de uma resposta automática para um determinado período (data de inicio - data fim) para todos e-mails recebidos. Por exemplo, quando é feito o envio de um e-mail, o mecanismo de respostas automáticas do Gmail irá responder  utilizando a resposta criada pelo usuário relacionado a um único assunto (férias, viagem de trabalho, são exemplos) [GMAIL, 2012]. Definiciencia esta também observada no hotmail, como visto em [HOTMAIL, 2012].
+
+Diante do exposto, no contexto educacional torna-se interessante que os professores possam habilitar um mecanismo que permita responder e-mails enviados por alunos, de forma inteligente e, levando em consideração o assunto do e-mail, ou seja, que domínio pertence. Assim, é desejável o professor possa configurar um mecanismo de respostas automáticas em seu e-mail para analisar e-mails de entrada. O e-mail de entrada inicialmente é identificado por uma TAG, por exemplo, FACULDADE-TURMA102-ORNITOLOGIA, que permite identificar o domínio do e-mail. Na TAG apresentada é possível identificar que o e-mail é sobre o domínio Ornitologia, que é um ramo da biologia que se dedica ao estudo das aves [WIKIPEDIA, 2012].
+
+A par do exposto, tem-se a hipótese de que por meio da orquestração de mecanismos para processamento de linguagem natural seja possível propor uma solução para essa classe de problemas.
+
+FUNDAMENTAÇÃO TEÓRICA
+---------------------
+
+Permitir que uma máquina seja capaz de raciocinar sobre a linguagem natural para interagir de forma inteligente com o usuário surgiu inicialmente com a concepção dos primeiros sistemas. De acordo com Vieira e Lima (2009), Allan Turing definia a inteligência computacional por meio da capacidade de estas entenderem a linguagem natural. Embora as máquinas no mais baixo nível trabalhem apenas com dígitos 0 e 1, tem-se um grande interesse em que as máquinas estejam próximas do pensamento humano.
+
+Sendo assim, neste trabalho tem-se o interesse em explorar a área de processamento de linguagem natural, com o objetivo de propor soluções inteligentes para sanar a deficiência existente em mecanismos de respostas automáticas de e-mails, como apresentado anteriormente.
+
+Para tanto, fez-se necessário explorar princípios e aplicações de linguística computacional, de forma a melhor compreender a área de processamento de linguagem natural. A linguistica computacional é a área que estuda as relações entre a linguista e a computação, tornando possível o processamento de linguagem natural, entre outras coisas (Vieira e Lima, 2009).
+
+O problema mais básico na linguística computacional é o reconhecimento da categoria das palavras. No contexto da computação, os sistemas que realizam este tipo de tarefa são denominados etiquetadores de categorias gramaticais. O etiquetador tem a responsabilidade de identificar as categorias (ou partes do discurso) as quais items léxicos pertencem (por exemplo, a palavra a pode ser um artigo feminino singular, preposição, substantivo masculino singular normal ou pronome feminino singular terceira pessoa, dependendo da forma como a palavra a está relacionada com outros items léxicos no texto), desta forma, o etiquetatador precisa analisar a forma como uma palavra está relacionada com às demais. Foram analisados os etiquetadores NLTK (disponível em http://nltk.org/) e VISL (disponível em http://beta.visl.sdu.dk/visl/pt/) e, constatou-se que o etiquetador VISL foi mais preciso do que o NLTK, pois o etiquetador VISL tem a capacidade de identificar uma maior quantidade de palavras, além disso, consegui reconhecer palavras compostas.
+
+Conseguinte, foram analisados a linguagem AIML (Artificial Intelligence Markup Language) e Ontologia, mais precisamente a criação de ontologia utilizando-se a linguagem OWL. No contexto do projeto, a linguagem AIML está sendo utilizada para elaboração das respostas, já a Ontologia está sendo utilizada como forma de representar um domínio (por exemplo, Ortonilogia), provendo conhecimento sobre o domínio modelado [AIML, 2012](REFOntologiaPendente, ano].
+
+MECANISMO INTELIGENTE PARA RESPOSTA AUTOMÁTICA DE E-MAILS
+---------------------------------------------------------
+
+A seguir são apresentador os modelos, mostrando as etapas realizadas pelo protótipo:
+
+Primeiro Modelo
+***************
+
+Etiquetagem do E-mail (Onde está ????? vai ser utilizado Ontologia, para por exemplo, identificar que um Canário é uma ave)
+
+.. image:: https://docs.google.com/drawings/d/sXWCbhxJ2QDxjxVqxr6WkEA/image?w=633&h=317&rev=134&ac=1
+
+Segundo Modelo
+**************
+
+Formulação da Resposta 
+
+.. image:: https://docs.google.com/drawings/d/sqfjwm-WT7rSpPeQX5LhBdg/image?w=633&h=306&rev=68&ac=1
+
+REFERÊNCIAS
+-----------
+
+Hotmail (2012),  "Configurar uma resposta automática no hotmail". Obtido a partir de : http://hotmail-entrar.com/configurar-uma-resposta-automatica-no-hotmail.html
+
+Gmail (2012), "Como configurar uma resposta automática de férias". Obtido a partir de: http://support.google.com/mail/bin/answer.py?hl=pt-BR&answer=25922
+
+Ornitologia (2012), "Ornitologia", Obtido a parti de: http://pt.wikipedia.org/wiki/Ornitologia 
+
+AIML (2012), "AIML: Artificial Intelligence Markup Language", Obtido a partir de: http://www.alicebot.org/aiml.html
