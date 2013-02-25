@@ -1,0 +1,88 @@
+{% extends 'base_site.html' %}
+
+{% block extrahead %} <script src="{{ STATIC_URL }}js/jquery.superslides.min.js"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}css/superslides.css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block body %}
+<div>
+	<section>
+		<article id="index">
+			<h1><a href="/" title="Lied">Lied</a></h1>
+			<nav class="navigation" role="navigation">
+				<ul>
+					<li>
+						<a href="http://lied.inf.ufes.br" class="active" title="Lied" target="_blank">Lied</a>
+					</li>
+					<li>
+						<a href="http://iaae20122ufes.pbworks.com" title="IAAE" target="_blank">IAAE</a>
+					</li>
+					<li>
+						<a href="http://donate.libreoffice.org" title="Donate">Sobre o projeto</a>
+					</li>
+					<li>
+						<a href="https://github.com/jordanorc/iaae" title="Código-fonte" target="_blank">Código-fonte</a>
+					</li>
+				</ul>
+			</nav>
+			<div id="slides">
+				<ul class="slides-container">
+					<li class="slide_1">
+						<img src="{{ STATIC_URL }}img/home/bg_slider_1.jpg" width="1024" height="768" alt="Resposta automática de e-mails">
+						<div class="container">
+							<div class="picture"></div>
+							<div class="txt">
+								<h2>E-mail</h2>
+								<a href="{% url mail:about %}" title="Resposta automática">Resposta automática</a>
+								<p>
+									Resposta automatizada de e-mails utilizando técnicas de Processamento de Linguagem Natural
+								</p>
+							</div>
+						</div>
+					</li>
+					<li class="slide_2">
+						<img src="{{ STATIC_URL }}img/home/bg_slider_2.jpg" width="1064" height="650" alt="Debate de Teses">
+						<div class="container slider2">
+							<div class="picture"></div>
+							<div class="txt">
+								<h2>Debate de Teses</h2>
+								<a href="{% url vle:home %}" title="Ambiente Virtual de Aprendizagem">Ambiente Virtual de Aprendizagem</a>
+								<p>
+									Um ambiente virtual criado com agentes BDI e técnicas de PLN baseado em uma Arquitetura Pedagógica apoiada nos pressupostos Teóricos Piagetianos.
+								</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</li>
+				</ul>
+				<nav class="slides-navigation">
+					<a href="#" class="next">Next</a>
+					<a href="#" class="prev">Previous</a>
+				</nav>
+			</div>
+		</article>
+	</section>
+	<section>
+		<article id="libre_office"></article>
+	</section>
+</div>
+<script src="http://www.libreoffice.org/mysite/javascripts/jquery.ascensor.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		// Background Slider
+
+		$('#slides').superslides({
+			slide_easing : 'easeInOutCubic',
+			slide_speed : 800,
+			pagination : false,
+			hashchange : true,
+			scrollable : true,
+			play : 50000
+		});
+
+	});
+</script>
+{% endblock %} 

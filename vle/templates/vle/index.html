@@ -1,0 +1,37 @@
+{% extends 'vle/base.html' %}
+
+{% block content %}
+<ul class="vle-index-menu">
+	<li class="student">
+		<a href="{% url vle:student_list %}">
+		<p>Manage Students</p>
+		</a>
+	</li>
+	<li class="tutor">
+		<a href="{% url vle:tutor_list %}">
+		<p>Manage Tutors</p>
+		</a>
+	</li>
+	<li class="subject">
+		<a href="{% url vle:subject_list %}">
+		<p>Manage Subjects</p>
+		</a>
+	</li>
+	<li class="course">
+		<a href="{% url vle:course_list %}">
+		<p>Manage Courses</p>
+		</a>
+	</li>
+	<li class="session">
+		<a href="{% url vle:session_list %}">
+		<p>Manage Sessions</p>
+		</a>
+	</li>
+	<li class="discussion">
+		<a href="">
+		<p>Manage Discussions</p>
+		</a>
+	</li>		
+</ul>
+
+{% endblock %}

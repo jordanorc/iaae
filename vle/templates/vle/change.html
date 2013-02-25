@@ -1,0 +1,68 @@
+{% extends 'vle/base.html' %}
+{% block inlinejs %}
+<script type="text/javascript">
+	$(function() {
+
+		$("#back").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-arrowreturnthick-1-w"
+			}
+		}).click(function(e) {
+			e.preventDefault();
+			window.location = ".."
+		});
+
+		$("#save").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-disk"
+			}
+		}).click(function(e) {
+			e.preventDefault();
+			$(this).closest('form').submit();
+		});
+
+		$("#delete").button({
+			text : true,
+			icons : {
+				primary : "ui-icon-trash"
+			}
+		}).click(function(e) {
+			e.preventDefault();
+			$(this).closest('form').submit();
+		});							
+	}); 
+</script>
+{% endblock %}
+
+{% block content %}
+<form action="." enctype="multipart/form-data"  class="change-form{% if form_css_class %} {{form_css_class}}{% endif %}" method="post">
+	<div id="change_toolbar" class="toolbar ui-widget-header ui-corner-all">
+		<button id="back">
+			Back
+		</button>
+		<button id="save">
+			Save
+		</button>
+		<button id="delete">
+			Delete
+		</button>
+	</div>
+
+	{% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {{ form.non_field_errors }}
+    {% for field in form.visible_fields %}
+        <div class="field-wrapper{%if field.errors%} error{% endif %}">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        </div>
+    {% endfor %}
+    {% block after-form %}
+    {% endblock %}
+</form>
+{% endblock %}

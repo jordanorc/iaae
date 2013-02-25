@@ -1,0 +1,123 @@
+{% extends 'vle/change.html' %}
+{% load i18n %}
+
+{% block inlinejs %}
+	{{ block.super }}
+<script type="text/javascript">
+	$(function() {
+		function manageTheses(automatically_generate) {
+        	if (automatically_generate.is(':checked')) {
+        		$('#theses').slideUp(300);
+        	}
+        	else {
+        		$('#theses').slideDown(300);
+        	}
+			
+		}
+		
+		$('#id_automatically_generate').change(function() {
+        	manageTheses($(this));
+   		});
+    	manageTheses($('#id_automatically_generate'));
+    	
+    	$('#id_number_theses').change(function() {
+    		deleteForm("{{ form.formset.prefix }}");
+    		for (i=1; i<parseInt($(this).val()); i++) {
+    			addForm("{{ form.formset.prefix }}");
+    			
+    		}
+    	});
+						
+
+    function deleteForm( prefix) {
+        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (formCount >= 1) {
+        	template = $('#id_' + prefix + '-TOTAL_FORMS').parent().children(".field-wrapper:gt(0)");
+            // Delete the item/form
+            template.remove();
+            var forms = $('#id_' + prefix + '-TOTAL_FORMS').parent().children(".field-wrapper"); // Get all the forms  
+            // Update the total number of forms (1 less than before)
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            var i = 0;
+            // Go through the forms and set their indices, names and IDs
+            for (formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).children().children().each(function () {
+                    if ($(this).attr('type') == 'text') updateElementIndex(this, prefix, i);
+                });
+            }
+        } // End if
+        return false;
+    }
+
+	 
+	
+	
+    // Code adapted from http://djangosnippets.org/snippets/1389/  
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+-)');
+        var replacement = prefix + '-' + ndx + '-';
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex,
+        replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+
+
+
+    function addForm(prefix) {
+        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        // You can only submit a maximum of 10 todo items 
+        if (formCount < 10) {
+        	template = $('#id_' + prefix + '-TOTAL_FORMS').parent().children(".field-wrapper:first");
+        	last_item = $('#id_' + prefix + '-TOTAL_FORMS').parent().children(".field-wrapper:last");
+        	
+            // Clone a form (without event handlers) from the first form
+            var row = template.clone(false).get(0);
+            // Insert it after the last form
+            $(row).removeAttr('id').hide().insertAfter(last_item).slideDown(300);
+
+            // Remove the bits we don't want in the new row/form
+            // e.g. error messages
+            $(".errorlist", row).remove();
+            $(row).children().removeClass("error");
+
+            // Relabel or rename all the relevant bits
+            $(row).children().each(function () {
+            	$(this).val("");
+                updateElementIndex(this, prefix, formCount);
+            });
+
+            // Add an event handler for the delete item/form link 
+            $(row).find(".delete").click(function () {
+                return deleteForm(this, prefix);
+            });
+            // Update the total form count
+            $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
+        } // End if
+        return false;
+    }
+    // Register the click event handlers
+    $("#add").click(function () {
+        return addForm("form");
+    });
+
+
+
+});
+</script>
+{% endblock %}
+
+{% block after-form %}
+	{{ block.super }}
+	
+	
+	<fieldset id="theses">
+		<legend>Theses</legend>
+		{{ form.formset.management_form }}
+		{% for f in form.formset %}
+			{% include "vle/form.html" with form=f %}
+		{% endfor %}
+	</fieldset>
+
+</form>
+{% endblock %}

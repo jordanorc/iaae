@@ -1,0 +1,17 @@
+{% extends "mail/processing/steps/step_base.html" %}
+{% load i18n %}
+
+{% block step_description %}
+<p>
+	{% trans "Nesta etapa, é realizada uma tentativa de resposta. Caso seja encontrada, a resposta é retornada, e o email respondido." %}
+</p>
+
+<h3>Resposta</h3>
+{% if answer %}
+	<p>{{ answer }}</p>
+{% else %}
+	<p>{% trans "Não foi localizada nenhuma resposta para o questionamento." %}</p>
+{% endif %}
+{% endblock %}
+
+{% load i18n %}

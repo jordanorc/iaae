@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block menu %}
+<div class="menu">
+	<ul>
+		<li>
+			<a href="{% url vle:home %}">Home</a>
+		</li>
+		<li>
+			<a href="{% url vle:ontology_list %}">Ontologies</a>
+		</li>
+		<li>
+			<a href="{% url vle:student_list %}">Students</a>
+		</li>
+		<li>
+			<a href="{% url vle:tutor_list %}">Tutors</a>
+		</li>
+		<li>
+			<a href="{% url vle:subject_list %}">Subject</a>
+		</li>
+		<li>
+			<a href="{% url vle:course_list %}">Courses</a>
+		</li>
+		<li>
+			<a href="{% url vle:session_list %}">Sessions</a>
+		</li>
+		<li>
+			<a href="{% url vle:log_list %}">Log</a>
+		</li>
+		<li>
+			<a href="{% url vle:agents_monitor %}">Monitor</a>
+		</li>
+		<li>
+			<a href="{% url vle:discussion_list %}">Discussion of Theses</a>
+		</li>
+	</ul>
+</div>
+{% endblock %}

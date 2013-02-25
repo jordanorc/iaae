@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY ornitologia "http://www.semanticweb.org/ontologies/2013/0/ornitologia#" >
+    <!ENTITY ornitologia_28022013 "http://www.semanticweb.org/robertomorati/ontologies/2013/0/ornitologia_28022013#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/celestrini/ontologies/2013/0/untitled-ontology-5#"
+     xml:base="http://www.semanticweb.org/celestrini/ontologies/2013/0/untitled-ontology-5"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:ornitologia="http://www.semanticweb.org/ontologies/2013/0/ornitologia#"
+     xmlns:ornitologia_28022013="http://www.semanticweb.org/robertomorati/ontologies/2013/0/ornitologia_28022013#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2013/0/ornitologia"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#eUm -->
+
+    <owl:ObjectProperty rdf:about="&ornitologia;eUm">
+        <rdfs:comment>{{ ART }} {{ SUJ }} é um {{ ADJ }}</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#inPertenceOrdem -->
+
+    <owl:ObjectProperty rdf:about="&ornitologia;inPertenceOrdem">
+        <rdfs:domain rdf:resource="&ornitologia;Ordem"/>
+        <owl:inverseOf rdf:resource="&ornitologia;pertenceOrdem"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#pertenceOrdem -->
+
+    <owl:ObjectProperty rdf:about="&ornitologia;pertenceOrdem">
+        <rdfs:comment>{{ ART }} {{ SUJ }} pertence à ordem {{ ADJ }}</rdfs:comment>
+        <rdfs:domain rdf:resource="&ornitologia;Ordem"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#temBico -->
+
+    <owl:ObjectProperty rdf:about="&ornitologia;temBico">
+        <rdfs:comment>{{ ART }} {{ SUJ }} possui bico {{ ADJ }}</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#temCor -->
+
+    <owl:ObjectProperty rdf:about="&ornitologia;temCor">
+        <rdfs:comment>{{ ART }} {{ SUJ }} possui a cor {{ ADJ }}</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#apelido -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;apelido"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#cores -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;cores"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#espécie -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;espécie">
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#formaBico -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;formaBico"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#nickname -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;nickname"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#nome -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;nome"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#nomeOrdem -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;nomeOrdem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#pertenceOrdem -->
+
+    <owl:DatatypeProperty rdf:about="&ornitologia;pertenceOrdem">
+        <rdfs:comment>{{ ART }} {{ SUJ }} pertence à ordem {{ ADJ }}</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Aves -->
+
+    <owl:Class rdf:about="&ornitologia;Aves">
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ornitologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Bico -->
+
+    <owl:Class rdf:about="&ornitologia;Bico">
+        <rdfs:subClassOf rdf:resource="&ornitologia;Caracteristicas"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Caracteristicas -->
+
+    <owl:Class rdf:about="&ornitologia;Caracteristicas">
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ornitologia"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Columbiformes -->
+
+    <owl:Class rdf:about="&ornitologia;Columbiformes">
+        <rdfs:label>columbiformes</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ordem"/>
+        <owl:disjointWith rdf:resource="&ornitologia;Passeriformes"/>
+        <owl:disjointWith rdf:resource="&ornitologia;Psittaciformes"/>
+        <rdfs:comment>É uma ordem de Aves que inclui espécies como - Pombo, Rola (Rolinha), Dodô etc;</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Cor -->
+
+    <owl:Class rdf:about="&ornitologia;Cor">
+        <rdfs:subClassOf rdf:resource="&ornitologia;Caracteristicas"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Ordem -->
+
+    <owl:Class rdf:about="&ornitologia;Ordem">
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ornitologia"/>
+        <rdfs:comment>Ordem é uma taxonomia utilizado como um sistema de classificação científica dos seres vivos para agrupar famílias constituídas por espécies que apresentam entre si um elevado grau de semelhança.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Ornitologia -->
+
+    <owl:Class rdf:about="&ornitologia;Ornitologia"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Passeriformes -->
+
+    <owl:Class rdf:about="&ornitologia;Passeriformes">
+        <rdfs:label>passeriformes</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ordem"/>
+        <owl:disjointWith rdf:resource="&ornitologia;Psittaciformes"/>
+        <rdfs:comment>Pertecente a classe Aves, conhecidos popularmente como pássaros ou passarinhos. Algumas aves pertecentes a está ordem são - Canário, Pardal (subordem Passeri) etc;
+</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Psittaciformes -->
+
+    <owl:Class rdf:about="&ornitologia;Psittaciformes">
+        <rdfs:label>psittaciformes</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&ornitologia;Ordem"/>
+        <rdfs:comment>Essa ordem inclui aves como Papagaio, Periquito, Arara, Calopsita etc</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Arara -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Arara">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Arara</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Psittaciformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Calopsita -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Calopsita">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Calopsita</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Psittaciformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Canario -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Canario">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <rdfs:label>Canário</rdfs:label>
+        <ornitologia:espécie>Canario</ornitologia:espécie>
+        <ornitologia:apelido>Canarinho</ornitologia:apelido>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Passeriformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Colorido -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Colorido">
+        <rdf:type rdf:resource="&ornitologia;Cor"/>
+        <ornitologia:cores>possui a cor vemelho e amarelo na cabeça e verde em seu corpo.</ornitologia:cores>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Columbiformes -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Columbiformes">
+        <rdf:type rdf:resource="&ornitologia;Columbiformes"/>
+        <rdf:type rdf:resource="&ornitologia;Ordem"/>
+        <rdfs:label>columbiformes</rdfs:label>
+        <ornitologia:nomeOrdem>Columbiformes</ornitologia:nomeOrdem>
+        <rdfs:comment>É uma ordem de Aves que inclui espécies como - Pombo, Rola (Rolinha), Dodô etc;</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Curvo -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Curvo">
+        <rdf:type rdf:resource="&ornitologia;Bico"/>
+        <ornitologia:formaBico>possui bico curvo.</ornitologia:formaBico>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Dodô -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Dodô">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Dodô</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Dodô"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Papagaio -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Papagaio">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Papagaio</ornitologia:espécie>
+        <ornitologia:temCor rdf:resource="&ornitologia;Colorido"/>
+        <ornitologia:temBico rdf:resource="&ornitologia;Curvo"/>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Psittaciformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Pardal -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Pardal">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Pardal</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Passeriformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Passeriformes -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Passeriformes">
+        <rdf:type rdf:resource="&ornitologia;Ordem"/>
+        <rdf:type rdf:resource="&ornitologia;Passeriformes"/>
+        <rdfs:label>passeriformes</rdfs:label>
+        <ornitologia:nomeOrdem>Passeriformes</ornitologia:nomeOrdem>
+        <rdfs:comment>Pertecente a classe Aves, conhecidos popularmente como pássaros ou passarinhos. Algumas aves pertecentes a está ordem são - Canário, Pardal (subordem Passeri) etc;
+</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Periquito -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Periquito">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:espécie>Periquito</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Psittaciformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Pombo -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Pombo">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <rdfs:label>Pombo</rdfs:label>
+        <ornitologia:espécie>Pombo</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Columbiformes"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Psittaciformes -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Psittaciformes">
+        <rdf:type rdf:resource="&ornitologia;Ordem"/>
+        <rdf:type rdf:resource="&ornitologia;Psittaciformes"/>
+        <rdfs:label>psittaciformes</rdfs:label>
+        <rdfs:comment>Essa ordem inclui aves como Papagaio, Periquito, Arara, Calopsita etc</rdfs:comment>
+        <ornitologia:nomeOrdem>Psittaciformes</ornitologia:nomeOrdem>
+        <ornitologia:inPertenceOrdem rdf:resource="&ornitologia;Arara"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2013/0/ornitologia#Rola -->
+
+    <owl:NamedIndividual rdf:about="&ornitologia;Rola">
+        <rdf:type rdf:resource="&ornitologia;Aves"/>
+        <ornitologia:apelido>Rolinha</ornitologia:apelido>
+        <ornitologia:espécie>Rola</ornitologia:espécie>
+        <ornitologia:pertenceOrdem rdf:resource="&ornitologia;Columbiformes"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net -->
+

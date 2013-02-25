@@ -7,7 +7,7 @@ import tempfile
 # globals
 env.local_path = os.path.abspath(os.path.dirname(__file__))
 env.project_name = 'nlp'
-env.project_repo = "https://github.com/jordanorc/nlp.git"
+env.project_repo = "https://github.com/jordanorc/iaae.git"
 
 def _paths():
     env.project_path = os.path.join(env.path, env.project_name)

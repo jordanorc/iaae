@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block menu %}
+<div class="menu">
+	<ul>
+		<li>
+			<a href="{% url mail:about %}">About</a>
+		</li>
+		<li>
+			<a href="{% url mail:inbox %}">Inbox</a>
+		</li>
+		<li>
+			<a href="{% url mail:compose %}">Compose</a>
+		</li>
+		<li>
+			<a href="{% url mail:processing %}">Processing</a>
+		</li>
+		<li>
+			<a href="{% url mail:nlp %}">NLP</a>
+		</li>
+	</ul>
+</div>
+{% endblock %}

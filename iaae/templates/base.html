@@ -1,0 +1,38 @@
+{% extends 'base_site.html' %}
+{% block body %}
+<div id="wrapper">
+	<div id="header">
+		<div class="title">
+			<a href="{% url index %}">
+				<div class="logo"></div>
+			</a>
+		</div>
+		{% block menu %}
+		{% endblock %}
+	</div>
+	<div id="content">
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{{ message }}</li>
+				{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% block content %}{% endblock %}
+		<div style="clear: both;"></div>
+	</div>
+	<div id="footer">
+		<p>
+			UFES - Universidade Federal do Espírito Santo
+		</p>
+		<p>
+			LIED - Laboratório de Informática na Educação
+		</p>
+		<p>
+			Desenvolvido por: Jordano Celestrini e Roberto Guimarães Morati Junior
+		</p>
+	</div>
+</div>
+{% endblock %} 

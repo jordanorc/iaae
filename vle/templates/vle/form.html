@@ -1,0 +1,10 @@
+{% for hidden in form.hidden_fields %}
+{{ hidden }}
+{% endfor %}
+{% for field in form.visible_fields %}
+    <div class="field-wrapper{%if field.errors%} error{% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+    </div>
+{% endfor %}

@@ -1,0 +1,82 @@
+{% extends 'vle/base.html' %}
+
+{% block content %}
+<script type="text/javascript">
+	$(function() {
+		var current_agent = null;
+		var terminal = $('#agent-terminal');
+		$(".vle-agents li a").click(function(e) {
+			e.preventDefault();
+			agent = $(this).closest("li").attr("id");
+			if (!$(this).closest("li").hasClass("disabled")) {
+				if (agent != current_agent) {
+					terminal.slideUp(300);
+					terminal.removeClass("opened");
+				}
+				
+				if (terminal.hasClass("opened")) {
+					terminal.slideUp(300);
+					terminal.removeClass("opened");
+				}
+				else {
+					terminal.slideDown(300);
+					terminal.addClass("opened");
+				}
+				
+				current_agent = agent;
+			}
+		});
+		
+		var last_pk = null;
+		var url = '{% url vle:ws_log_list "agent-replace" %}';
+		window.setInterval(function() {
+			
+			get_url = url.replace("agent-replace", "agent-creator")
+			if (last_pk != null) {
+				get_url = get_url.concat(last_pk).concat("/");
+			}
+			$.getJSON(get_url, 
+				function(data) {
+					if (data["pk"] != null) {
+						last_pk = data["pk"]
+					}
+					$.each(data["logs"], function(key, val) {
+						$('#agent-terminal').append(val["date"]);
+						$('#agent-terminal').append(": ");
+						$('#agent-terminal').append(val["message"]);
+						$('#agent-terminal').append($('<br />'));
+					});
+				});
+			    terminal.animate({
+			        scrollTop: terminal[0].scrollHeight
+			    }, 300);
+		}, 5000);	
+	});	
+</script>
+
+
+<ul class="vle-agents">
+	<li id="agent-creator" class="agent-creator">
+		<a href="{% url vle:student_list %}">
+		<p>Agent for creation</p>
+		</a>
+	</li>
+	<li id="agent-raffle" class="agent-raffle disabled">
+		<a href="{% url vle:tutor_list %}">
+		<p>Agent for riffle</p>
+		</a>
+	</li>	
+	<li id="agent-validator" class="agent-validator disabled">
+		<a href="{% url vle:tutor_list %}">
+		<p>Agent for validation</p>
+		</a>
+	</li>	
+</ul>
+
+<div id="agent-terminal" class="agent-terminal">
+	<p>Log terminal</p>
+	
+</div>
+
+
+{% endblock %}

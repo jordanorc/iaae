@@ -1,0 +1,11 @@
+{% extends "vle/change.html" %}
+{% block inlinejs %}
+	{{ block.super }}
+	
+	<script type="text/javascript">
+	$(function() {
+		$("#id_date_from").datepicker();
+		$("#id_date_to").datepicker();
+	});
+	</script>
+{% endblock %}

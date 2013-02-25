@@ -1,0 +1,274 @@
+body {
+	font-family: 'Open Sans Condensed', sans-serif;
+	background: #e9e9e9;
+}
+
+#index {
+	background: #212121;
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+.container {
+	width: 750px;
+	margin: 15px auto;
+	padding-top: 140px;
+}
+h1 a {
+	background-image: url("../img/home/logo_libre_office.png");
+	display: block;
+	height: 231px;
+	left: 50%;
+	margin-left: -393px;
+	position: absolute;
+	text-indent: -9999px;
+	width: 786px;
+	z-index: 1000;
+}
+h2 {
+	margin: 0;
+}
+h3 {
+	margin-bottom: 25px;
+	margin-top: 25px;
+	font-size: 36px;
+	line-height: 40px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+a, a:active, nav {
+	text-decoration: none;
+	border: none;
+	color: #45AA27;
+}
+a:visited {
+	color: #45AA27;
+}
+a:hover {
+	color: #000;
+}
+ul {
+	padding-left: 15px;
+}
+li {
+	list-style: square;
+}
+#index p {
+	line-height: 27px;
+	font-size: 23px;
+}
+p {
+	line-height: 25px;
+	font-size: 18px;
+}
+.left {
+	float: left;
+	margin-right: 40px;
+}
+.right {
+	float: right;
+	margin-left: 40px;
+}
+.clear {
+	clear: both;
+}
+.clearfix:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
+}
+.clearfix {
+	display: inline-table;
+}
+.line_top {
+	border-top: 1px solid #fff;
+	padding-bottom: 35px;
+	padding-top: 35px;
+	display: block;
+}
+.line_bottom {
+	border-bottom: 1px solid #c9c9c9;
+	padding-bottom: 35px;
+	padding-top: 35px;
+	display: block;
+}
+#ascensorBuilding {
+	overflow: hidden;
+}
+/********************** Navigation princiaple*/
+nav {
+	position: absolute;
+	width: 100%;
+	z-index: 10000;
+	text-align: center;
+}
+nav.navigation {
+	background: #292929;
+	border-bottom: 1px solid #6C6C6C;
+	top: 0;
+	height: 63px;
+}
+#index nav.navigation {
+	bottom: 0;
+	top: inherit;
+}
+nav ul li {
+	display: inline-block;
+	margin: 15px 15px 0px;
+	text-align: center;
+}
+nav ul li a, nav ul li a:visited {
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	font-size: 24px;
+	padding: 0px 15px;
+}
+nav ul li a:hover, nav ul li a.active {
+	border-radius: 20px 20px 20px 20px;
+	-moz-border-radius: 20px 20px 20px 20px;
+	-o-border-radius: 20px 20px 20px 20px;
+	-webkit-border-radius: 20px 20px 20px 20px;
+}
+nav.navigation ul li a:hover, nav.navigation ul li a.active {
+	background-color: #DD4814;
+	color: #292929;
+}
+
+#legal {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    text-align: right;
+}
+#legal a:hover {
+    color: #fff;
+}
+
+
+/********************** Navigation secondaire*/
+nav.secondary_nav {
+	background: #FFF;
+	border-bottom: 1px solid #d9d9d9;
+	border-top: 1px solid #d9d9d9;
+	top: 63px;
+	height: 37px;
+}
+nav.secondary_nav ul li {
+	margin-top: 5px;
+}
+nav.secondary_nav ul li a {
+	font-size: 18px;
+	color: #292929;
+}
+nav.secondary_nav ul li a:hover, nav.secondary_nav ul li a.active {
+	background-color: #292929;
+	color: #fff;
+}
+/**********************Nav slider*/
+
+.slides-navigation .next, .slides-navigation .prev {
+	display: block;
+	background-image: url('../img/home/sprite.png');
+	width: 50px;
+	height: 73px;
+	text-indent: -9999px;
+}
+.slides-navigation a.next {
+	background-position: -47px;
+	right: 20px;
+}
+.slides-navigation a.prev {
+	left: 20px;
+}
+/**********************Content HP*/
+/*Slider 1*/
+
+#slides .txt h2 {
+	color: #DD4814;
+    font-size: 52px;
+}
+#slides .txt p {
+	font-size: 26px;
+	color: #000;
+	line-height: 35px;
+}
+#slides .txt a {
+	font-weight: bold;
+	font-size: 26px;
+	color: #DD4814;
+}
+
+/*slider 1*/
+
+#slides .slide_1 .container, #slides .slide_2 .container {
+	padding-top:250px;
+	} 
+#slides .slide_1 .txt  {
+	float: left;
+    margin-top: 0px;
+    text-align: left;
+    width: 410px;
+}
+#slides .slide_1 .picture  {
+	float:right;
+	width: 280px;
+	background-repeat: no-repeat;
+	background-image: url('../img/home/img_slider_1.png');
+	height: 250px;
+	margin: 0 auto;
+}
+/*slider 2*/
+#slides .slide_2 .txt  {
+	margin-top: 0px;
+	width: 410px;
+	float: right;
+}
+#slides .slide_2 .picture  {
+	float: left;
+	width: 280px;
+	background-repeat: no-repeat;
+	background-image: url('../img/home/img_slider_2.png');
+	height: 250px;
+}
+
+/**********************Content*/
+
+.content {
+	width: 840px;
+	margin: 155px auto 0;
+}
+footer {
+	background: #292929;
+	border-top: 1px solid #fff;
+	padding: 50px 0;
+	color: #fff;
+}
+footer p {
+	width: 840px;
+	margin: 0 auto;
+	font-size: 14px;
+	line-height: 16px;
+}
+footer a, footer a:visited, footer a:link {
+	color: #DD4814;
+}
+footer a:focus, footer a:hover, footer a:active {
+	text-decoration: underline;
+}
+.collaborate {
+	margin-top:0;
+}
+section {
+	overflow: auto;
+	display: block;
+}
+
+#index h1 {
+    padding: 0;
+    margin: 0;
+}

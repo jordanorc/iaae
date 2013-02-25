@@ -1,0 +1,156 @@
+[
+    {
+        "pk": 1, 
+        "model": "vle.subject", 
+        "fields": {
+            "name": "Portuguese"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.course", 
+        "fields": {
+            "description": "Curso de teste", 
+            "updated": "2013-02-18T23:29:09.607Z", 
+            "created": "2013-02-18T23:29:09.607Z", 
+            "name": "Curso de teste", 
+            "slug": "curso-de-teste"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.session", 
+        "fields": {
+            "students": [
+                1
+            ], 
+            "tutors": [
+                1
+            ], 
+            "date_from": "2013-02-18", 
+            "year": 2012, 
+            "course": 1, 
+            "semester": 1, 
+            "date_to": "2013-02-28", 
+            "slug": "curso-de-teste"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "Discuss\u00e3o de teste"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "teste"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "teste"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "teste"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "teste"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "vle.discussion", 
+        "fields": {
+            "session": 1, 
+            "title": "teste"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.thesis", 
+        "fields": {
+            "discussion": 1, 
+            "description": "Pardal \u00e9 um p\u00e1ssaro"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "vle.thesis", 
+        "fields": {
+            "discussion": 1, 
+            "description": "Garfield \u00e9 um cachorro"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "admin", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2012-12-18T11:22:36.507Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$FHVhswfo1pJ9$aDxqK6I+k+EYo5Gy9TajNoev2IB3mHm23AFZfs4zrD4=", 
+            "email": "admin@admin.com.br", 
+            "date_joined": "2012-12-18T11:22:36.507Z"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.tutor", 
+        "fields": {
+            "address_line2": "291 - Ap. 105", 
+            "city": "Vit\u00f3ria", 
+            "first_name": "Jordano", 
+            "last_name": "Celestrini", 
+            "date_birth": "1987-06-26", 
+            "gender": 2, 
+            "state": "ES", 
+            "address_line1": "Rua Belmiro Teixeira Pimenta", 
+            "user": 1, 
+            "country": "Brazil", 
+            "middle_name": "Ribeiro", 
+            "pin_code": "29090600"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "vle.student", 
+        "fields": {
+            "address_line2": "291 - Ap. 105", 
+            "city": "Vit\u00f3ria", 
+            "first_name": "Jordano", 
+            "last_name": "Celestrini", 
+            "date_birth": "1987-06-26", 
+            "gender": 1, 
+            "state": "ES", 
+            "address_line1": "Rua Belmiro Teixeira Pimenta", 
+            "user": 1, 
+            "country": "Brazil", 
+            "middle_name": "Ribeiro", 
+            "pin_code": "29090600"
+        }
+    }
+]
